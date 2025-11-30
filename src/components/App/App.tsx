@@ -28,18 +28,23 @@ function App() {
     });
   };
 
-  const total = votes.good + votes.neutral + votes.bad;
-  const positive = total > 0 ? Math.round((votes.good / total) * 100) : 0;
+  const totalVotes = votes.good + votes.neutral + votes.bad;
+  const positiveRate =
+    totalVotes > 0 ? Math.round((votes.good / totalVotes) * 100) : 0;
 
   return (
     <>
       <div className={css.app}>
         <CafeInfo />
         <VoteOptions onVote={handleVote} onReset={resetVotes} />
-        {total === 0 ? (
+        {totalVotes === 0 ? (
           <Notification />
         ) : (
-          <VoteStats votes={votes} total={total} positive={positive} />
+          <VoteStats
+            votes={votes}
+            totalVotes={totalVotes}
+            positiveRate={positiveRate}
+          />
         )}
       </div>
     </>
